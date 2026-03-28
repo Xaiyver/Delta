@@ -1,40 +1,15 @@
 import * as Generators from './generators/index.js';
 
+import { UIManager } from './core/ui_manager.js';
+
 import { MathRegistry } from './registry.js';
 import { MenuManager } from './menu.js';
 import { GameTimer } from './timer.js';
 
 class GameManager {
     constructor() {
-        this.score = 0;
-        this.rawCorrect = 0;
-        this.pointsPerQuestion = 1;
-        this.timeLeft = 120;
-        this.timerInterval = null;
-        this.currentProblem = null;
-        this.activeModules = [];
-        this.runTimer = null;
-
-        this.els = {
-            startBtn: document.getElementById('start-btn'),
-            restartBtn: document.getElementById('restart-btn'),
-            configBtn: document.getElementById('config-btn'),
-            configBackBtn: document.getElementById('config-back-btn'),
-            backToMenuBtn: document.getElementById('back-to-menu-btn'),
-            input: document.getElementById('answer-input'),
-            startScreen: document.getElementById('start-screen'),
-            gameScreen: document.getElementById('game-screen'),
-            endScreen: document.getElementById('end-screen'),
-            configScreen: document.getElementById('config-screen'),
-            expression: document.getElementById('expression'),
-            timer: document.getElementById('time-bar'),
-            score: document.getElementById('score'),
-            finalScore: document.getElementById('final-score'),
-            statsBreakdown: document.getElementById('stats-breakdown'),
-            fontSizeSlider: document.getElementById('font-size-slider'),
-            fontSizeDisplay: document.getElementById('font-size-display'),
-        };
-
+        this.ui = new UIManager();
+        this.els = this.ui.els;
         this.initEventListeners();
         this.loadConfig();
         this.renderChart(); // Draw chart on load
