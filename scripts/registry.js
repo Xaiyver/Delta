@@ -1,5 +1,5 @@
 // Central configuration for the game's subjects and modules
-window.MathRegistry = {
+export const MathRegistry = {
     Arithmetic: {
         defaultActive: true,
         modules: [{ id: 'BasicOperations', name: 'Basic Operations', sig: '14 + (-16)' }],

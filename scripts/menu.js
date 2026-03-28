@@ -1,5 +1,7 @@
 // menu.js
 
+import { MathRegistry } from './registry.js';
+
 export class MenuManager {
     constructor() {
         this.container = document.getElementById('dynamic-menu');
@@ -9,7 +11,7 @@ export class MenuManager {
     init() {
         this.container.innerHTML = '';
 
-        for (const [subjectName, subjectData] of Object.entries(window.MathRegistry)) {
+        for (const [subjectName, subjectData] of Object.entries(MathRegistry)) {
             const subjectBox = this.createSubjectBox(subjectName, subjectData);
             this.container.appendChild(subjectBox);
         }

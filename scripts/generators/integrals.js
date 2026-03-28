@@ -22,7 +22,7 @@ export class Integrals {
 
             return {
                 latex: `\\int_{${lower}}^{${upper}} (${aStr}x^2 ${bStr}) \\, dx`,
-                answer: answer,
+                answer: Math.round(answer),
             };
         },
 

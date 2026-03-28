@@ -1,21 +1,8 @@
-// Generator modules
-import { BasicOperations } from './generators/basic_operations.js';
-import { Determinants } from './generators/determinants.js';
-import { Integrals } from './generators/integrals.js';
-import { Limits } from './generators/limits.js';
-import { Derivatives } from './generators/derivatives.js';
+import * as Generators from './generators/index.js';
 
+import { MathRegistry } from './registry.js';
 import { MenuManager } from './menu.js';
-
 import { GameTimer } from './timer.js';
-
-const ModuleMap = {
-    BasicOperations: BasicOperations,
-    Determinants: Determinants,
-    Integrals: Integrals,
-    Limits: Limits,
-    Derivatives: Derivatives,
-};
 
 class GameManager {
     constructor() {
@@ -40,7 +27,7 @@ class GameManager {
             endScreen: document.getElementById('end-screen'),
             configScreen: document.getElementById('config-screen'),
             expression: document.getElementById('expression'),
-            timer: document.getElementById('timer'),
+            timer: document.getElementById('time-bar'),
             score: document.getElementById('score'),
             finalScore: document.getElementById('final-score'),
             statsBreakdown: document.getElementById('stats-breakdown'),
@@ -159,7 +146,7 @@ class GameManager {
         const randomModuleId =
             this.activeModules[Math.floor(Math.random() * this.activeModules.length)];
 
-        this.currentProblem = ModuleMap[randomModuleId].generateProblem();
+        this.currentProblem = Generators[randomModuleId].generateProblem();
 
         katex.render(this.currentProblem.latex, this.els.expression, {
             throwOnError: false,
@@ -181,7 +168,10 @@ class GameManager {
     }
 
     endGame() {
-        if (this.runTimer) this.runTimer.stop();
+        if (this.runTimer) {
+            this.runTimer.stop();
+            this.runTimer = null;
+        }
         this.showScreen('end');
         this.els.finalScore.innerText = this.score;
         this.els.statsBreakdown.innerText = `(${this.rawCorrect} solved at ${this.pointsPerQuestion} pts each)`;
