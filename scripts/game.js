@@ -1,5 +1,5 @@
 // Generator modules
-import { Arithmetic } from './generators/arithmetic.js';
+import { BasicOperations } from './generators/basic_operations.js';
 import { Determinants } from './generators/determinants.js';
 import { Integrals } from './generators/integrals.js';
 import { Limits } from './generators/limits.js';
@@ -10,7 +10,7 @@ import { MenuManager } from './menu.js';
 import { GameTimer } from './timer.js';
 
 const ModuleMap = {
-    Arithmetic: Arithmetic,
+    BasicOperations: BasicOperations,
     Determinants: Determinants,
     Integrals: Integrals,
     Limits: Limits,

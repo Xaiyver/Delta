@@ -1,23 +1,37 @@
 // Central configuration for the game's subjects and modules
 window.MathRegistry = {
-    "Arithmetic": {
+    Arithmetic: {
         defaultActive: true,
-        modules: [
-            { id: "Arithmetic", name: "Basic Operations", sig: "14 + (-16)" }
-        ]
+        modules: [{ id: 'BasicOperations', name: 'Basic Operations', sig: '14 + (-16)' }],
     },
-    "Linear Algebra": {
+    'Linear Algebra': {
         defaultActive: true,
         modules: [
-            { id: "Determinants", name: "Determinants", sig: "\\begin{vmatrix} 12 & -6 \\\\ 2 & 11 \\end{vmatrix}" }
-        ]
+            {
+                id: 'Determinants',
+                name: 'Determinants',
+                sig: '\\begin{vmatrix} 12 & -6 \\\\ 2 & 11 \\end{vmatrix}',
+            },
+        ],
     },
-    "Real Calculus": {
+    'Real Calculus': {
         defaultActive: true,
         modules: [
-            { id: "Limits", name: "Limits", sig: "\\displaystyle \\lim_{x \\to \\infty} \\frac{x}{2x}" },
-            { id: "Integrals", name: "Definite Integrals", sig: "\\displaystyle \\int_0^\\pi \\sin(x) dx" },
-            { id: "Derivatives", name: "Derivatives", sig: "\\left. \\frac{d}{dx}(x^2) \\right|_{x=3}" }
-        ]
-    }
+            {
+                id: 'Limits',
+                name: 'Limits',
+                sig: '\\displaystyle \\lim_{x \\to \\infty} \\frac{x}{2x}',
+            },
+            {
+                id: 'Integrals',
+                name: 'Definite Integrals',
+                sig: '\\displaystyle \\int_0^\\pi \\sin(x) dx',
+            },
+            {
+                id: 'Derivatives',
+                name: 'Derivatives',
+                sig: '\\left. \\frac{d}{dx}(x^2) \\right|_{x=3}',
+            },
+        ],
+    },
 };
