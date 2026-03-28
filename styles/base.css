@@ -1,0 +1,55 @@
+:root {
+    --base3: #fdf6e3;
+    --base2: #eee8d5;
+    --base00: #657b83;
+    --base01: #586e75;
+    --blue: #268bd2;
+    --cyan: #2aa198;
+    --expr-size: 3rem; 
+}
+
+body {
+    background-color: var(--base3);
+    color: var(--base00);
+    font-family: system-ui, -apple-system, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    text-align: center;
+    overflow: hidden;
+}
+
+h1, h2 { color: var(--base01); }
+.hidden { display: none !important; }
+
+/* Global Button Styling */
+button {
+    background-color: var(--base2);
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    padding: 10px 24px;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: transform 0.15s ease, background-color 0.15s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: var(--blue);
+    color: var(--base3);
+    transform: scale(1.05);
+}
+
+.alt-btn {
+    font-size: 1rem;
+    padding: 8px 16px;
+    border-color: var(--base00);
+    color: var(--base00);
+}
+
+.alt-btn:hover {
+    background-color: var(--base00);
+}

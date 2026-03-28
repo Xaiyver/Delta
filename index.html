@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SpeedMath</title>
+    <link rel="stylesheet" href="styles/base.css">
+    <link rel="stylesheet" href="styles/menu.css">
+    <link rel="stylesheet" href="styles/game.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <script type= "module" defer src="scripts/game.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <div id="start-screen">
+        <h1>Delta</h1>
+        <script defer src="registry.js"></script>
+        <script defer src="menu.js"></script>
+
+        <div id="module-selection">
+          <div id="dynamic-menu">Loading modules...</div>
+        </div>
+        <div class="menu-buttons">
+          <button id="start-btn">Start Game</button>
+          <button id="config-btn" class="alt-btn">Configuration</button>
+        </div>
+        
+        <div id="chart-container"></div>
+        <div class="chart-label">Recent Scores</div>
+      </div>
+
+      <div id="config-screen" class="hidden">
+        <h2>Configuration</h2>
+        <div class="config-group">
+          <label for="font-size-slider">Font Size: <span id="font-size-display">3</span>rem</label>
+          <input type="range" id="font-size-slider" min="2" max="6" step="0.5" value="3">
+        </div>
+        <button id="config-back-btn">Back</button>
+      </div>
+
+      <div id="game-screen" class="hidden">
+        <div id="top-bar">
+          <div id="timer">2:00</div>
+          <div id="score-display">Score: <span id="score">0</span></div>
+        </div>
+        <div id="expression"></div>
+        <input type="number" id="answer-input" autocomplete="off" placeholder="Answer">
+      </div>
+
+      <div id="end-screen" class="hidden">
+        <h2>Time's Up!</h2>
+        <p>Final Score: <span id="final-score"></span></p>
+        <p id="stats-breakdown"></p>
+        <button id="restart-btn">Play Again</button>
+      </div>
+
+      <button id="back-to-menu-btn" class="hidden alt-btn">Back to Menu</button>
+    </div>
+  </body>
+</html>

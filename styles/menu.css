@@ -1,0 +1,85 @@
+/* Dynamic Dashboard Menu Styling */
+#dynamic-menu {
+    display: flex;
+    flex-direction: column;
+    gap: 35px; 
+    width: 100%;
+    max-width: 750px;
+    margin: 20px auto;
+}
+
+.subject-box {
+    background: transparent;
+    text-align: left;
+}
+
+.subject-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--base00);
+    margin-bottom: 12px;
+    border-bottom: none; 
+    text-transform: uppercase; 
+    letter-spacing: 1px;
+}
+
+.modules-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+/* Minimalist Module Cards */
+.module-card {
+    cursor: pointer;
+    user-select: none;
+}
+
+.module-card input[type="checkbox"] {
+    display: none; 
+}
+
+.card-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    height: 100px;
+    background-color: var(--base2); 
+    border: 2px solid transparent; 
+    border-radius: 6px;
+    transition: all 0.15s ease;
+    text-align: center;
+    padding: 8px;
+
+    /* Disabled State */
+    opacity: 0.80;
+    filter: grayscale(20%);
+}
+
+.module-name {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: var(--base01);
+    margin-bottom: 8px;
+}
+
+.module-card:hover .card-content {
+    opacity: 1;
+    filter: grayscale(5%);
+}
+
+/* Active State Styles */
+.module-card input:checked + .card-content {
+    opacity: 1;
+    filter: grayscale(0%);
+    background-color: var(--base3); 
+    border-color: var(--cyan); 
+    box-shadow: 0 4px 12px rgba(42, 161, 152, 0.1); 
+}
+
+/* Click Animation */
+.module-card:active .card-content {
+    transform: scale(0.95);
+}
