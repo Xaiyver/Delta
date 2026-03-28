@@ -1,4 +1,4 @@
-class MenuManager {
+export class MenuManager {
     constructor() {
         this.container = document.getElementById('dynamic-menu');
         this.init();
