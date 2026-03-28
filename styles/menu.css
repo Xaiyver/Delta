@@ -2,7 +2,7 @@
 #dynamic-menu {
     display: flex;
     flex-direction: column;
-    gap: 35px; 
+    gap: 35px;
     width: 100%;
     max-width: 750px;
     margin: 20px auto;
@@ -18,8 +18,8 @@
     font-weight: 600;
     color: var(--base00);
     margin-bottom: 12px;
-    border-bottom: none; 
-    text-transform: uppercase; 
+    border-bottom: none;
+    text-transform: uppercase;
     letter-spacing: 1px;
 }
 
@@ -35,8 +35,8 @@
     user-select: none;
 }
 
-.module-card input[type="checkbox"] {
-    display: none; 
+.module-card input[type='checkbox'] {
+    display: none;
 }
 
 .card-content {
@@ -46,15 +46,15 @@
     justify-content: center;
     width: 140px;
     height: 100px;
-    background-color: var(--base2); 
-    border: 2px solid transparent; 
+    background-color: var(--base2);
+    border: 2px solid transparent;
     border-radius: 6px;
     transition: all 0.15s ease;
     text-align: center;
     padding: 8px;
 
     /* Disabled State */
-    opacity: 0.80;
+    opacity: 0.8;
     filter: grayscale(20%);
 }
 
@@ -74,12 +74,62 @@
 .module-card input:checked + .card-content {
     opacity: 1;
     filter: grayscale(0%);
-    background-color: var(--base3); 
-    border-color: var(--cyan); 
-    box-shadow: 0 4px 12px rgba(42, 161, 152, 0.1); 
+    background-color: var(--base3);
+    border-color: var(--cyan);
+    box-shadow: 0 4px 12px rgba(42, 161, 152, 0.1);
 }
 
 /* Click Animation */
 .module-card:active .card-content {
     transform: scale(0.95);
+}
+
+.module-highscore {
+    font-size: 0.75rem;
+    color: var(--base01);
+    margin-top: 8px;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+}
+
+.module-card:hover .module-highscore {
+    opacity: 1;
+}
+
+.module-card input:checked + .card-content .module-highscore {
+    color: var(--cyan); /* Highlight the score when active */
+    opacity: 1;
+}
+
+/* Adjust card height to accommodate the new text */
+.card-content {
+    /* ... existing styles ... */
+    height: 120px; /* Increased from 100px */
+}
+/* Container for the hint message */
+#selection-hint {
+    font-size: 0.85rem;
+    color: var(--orange); /* Use a warning color from your palette */
+    margin-top: -20px;
+    margin-bottom: 20px;
+    text-align: center;
+    min-height: 1.2rem;
+    font-weight: 500;
+    transition: opacity 0.2s ease;
+}
+
+/* Dim the "Best" scores when they won't be updated */
+#dynamic-menu.multi-select .module-highscore {
+    opacity: 0.3;
+    filter: grayscale(100%);
+    text-decoration: line-through; /* Optional: clear visual indicator */
+}
+
+/* Add a help cursor to explain why they are dimmed */
+#dynamic-menu.multi-select .module-highscore::after {
+    content: ' (Locked)';
+    font-size: 0.7rem;
+    text-decoration: none;
+    display: inline-block;
 }

@@ -21,7 +21,7 @@ class GameManager {
     constructor() {
         this.score = 0;
         this.rawCorrect = 0;
-        this.pointsPerQuestion = 10;
+        this.pointsPerQuestion = 1;
         this.timeLeft = 120;
         this.timerInterval = null;
         this.currentProblem = null;
@@ -117,7 +117,11 @@ class GameManager {
         this.els.configScreen.classList.add('hidden');
         this.els.backToMenuBtn.classList.add('hidden');
 
-        if (screen === 'start') this.els.startScreen.classList.remove('hidden');
+        if (screen === 'start') {
+            this.els.startScreen.classList.remove('hidden');
+            // If the user went back to menu, re-render the menu to update potentially new high scores
+            if (window.MenuUI) window.MenuUI.init();
+        }
         if (screen === 'config') this.els.configScreen.classList.remove('hidden');
         if (screen === 'game') {
             this.els.gameScreen.classList.remove('hidden');
@@ -137,9 +141,6 @@ class GameManager {
             return;
         }
 
-        const multiplier = 1 + (this.activeModules.length - 1) * 0.5;
-        this.pointsPerQuestion = Math.round(10 * multiplier);
-
         this.score = 0;
         this.rawCorrect = 0;
         this.timeLeft = 120;
@@ -153,6 +154,7 @@ class GameManager {
         this.runTimer.start();
         this.nextProblem();
     }
+
     nextProblem() {
         const randomModuleId =
             this.activeModules[Math.floor(Math.random() * this.activeModules.length)];
@@ -185,6 +187,7 @@ class GameManager {
         this.els.statsBreakdown.innerText = `(${this.rawCorrect} solved at ${this.pointsPerQuestion} pts each)`;
 
         this.saveScore(this.score);
+        this.saveModuleHighScore(this.score);
         this.renderChart();
     }
 
@@ -193,6 +196,19 @@ class GameManager {
         const db = JSON.parse(localStorage.getItem('speedmath_db') || '[]');
         db.push({ score, timestamp: Date.now() });
         localStorage.setItem('speedmath_db', JSON.stringify(db));
+    }
+
+    saveModuleHighScore(score) {
+        // Only save to specific module if exactly ONE module was active
+        if (this.activeModules.length === 1) {
+            const moduleId = this.activeModules[0];
+            const storageKey = `highscore_${moduleId}`;
+            const currentHighScore = parseInt(localStorage.getItem(storageKey), 10) || 0;
+
+            if (score > currentHighScore) {
+                localStorage.setItem(storageKey, score);
+            }
+        }
     }
 }
 
