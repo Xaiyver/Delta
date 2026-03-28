@@ -26,6 +26,15 @@ export class MathUtils {
         if (k === 3) return '\\frac{3\\pi}{2}';
         if (k === 4) return '2\\pi';
     }
+    static getRandomInt(min, max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    static getNonZeroInt(min, max) {
+        let val = 0;
+        while (val === 0) val = getRandomInt(min, max);
+        return val;
+    }
 }
 
 window.MathModules = {};

@@ -1,4 +1,4 @@
-import { MathUtils } from './math.js';
+import { MathUtils } from '../math.js';
 
 export class Integrals {
     static generators = [

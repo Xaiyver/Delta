@@ -1,14 +1,20 @@
-import { Arithmetic } from './arithmetic.js';
-import { Determinants } from './determinants.js';
-import { Integrals } from './integrals.js';
-import { Limits } from './limits.js';
+// Generator modules
+import { Arithmetic } from './generators/arithmetic.js';
+import { Determinants } from './generators/determinants.js';
+import { Integrals } from './generators/integrals.js';
+import { Limits } from './generators/limits.js';
+import { Derivatives } from './generators/derivatives.js';
+
 import { MenuManager } from './menu.js';
 
+import { GameTimer } from './timer.js';
+
 const ModuleMap = {
-    'Arithmetic': Arithmetic,
-    'Determinants': Determinants,
-    'Integrals': Integrals,
-    'Limits': Limits
+    Arithmetic: Arithmetic,
+    Determinants: Determinants,
+    Integrals: Integrals,
+    Limits: Limits,
+    Derivatives: Derivatives,
 };
 
 class GameManager {
@@ -20,6 +26,7 @@ class GameManager {
         this.timerInterval = null;
         this.currentProblem = null;
         this.activeModules = [];
+        this.runTimer = null;
 
         this.els = {
             startBtn: document.getElementById('start-btn'),
@@ -38,7 +45,7 @@ class GameManager {
             finalScore: document.getElementById('final-score'),
             statsBreakdown: document.getElementById('stats-breakdown'),
             fontSizeSlider: document.getElementById('font-size-slider'),
-            fontSizeDisplay: document.getElementById('font-size-display')
+            fontSizeDisplay: document.getElementById('font-size-display'),
         };
 
         this.initEventListeners();
@@ -50,14 +57,15 @@ class GameManager {
         this.els.startBtn.addEventListener('click', () => this.startGame());
         this.els.restartBtn.addEventListener('click', () => this.startGame());
         this.els.input.addEventListener('input', () => this.checkAnswer());
-        
+
         this.els.configBtn.addEventListener('click', () => this.showScreen('config'));
         this.els.configBackBtn.addEventListener('click', () => {
             this.showScreen('start');
             this.renderChart();
         });
-        
+
         this.els.backToMenuBtn.addEventListener('click', () => {
+            if (this.runTimer) this.runTimer.stop();
             clearInterval(this.timerInterval);
             this.showScreen('start');
             this.renderChart();
@@ -82,7 +90,7 @@ class GameManager {
         const db = JSON.parse(localStorage.getItem('speedmath_db') || '[]');
         const chartContainer = document.getElementById('chart-container');
         chartContainer.innerHTML = '';
-        
+
         if (db.length === 0) {
             chartContainer.innerHTML = '<span class="empty-chart">No games played yet.</span>';
             return;
@@ -90,9 +98,9 @@ class GameManager {
 
         // Take the last 20 games to prevent the chart from overflowing
         const recentGames = db.slice(-20);
-        const maxScore = Math.max(...recentGames.map(g => g.score), 10); 
+        const maxScore = Math.max(...recentGames.map((g) => g.score), 10);
 
-        recentGames.forEach(game => {
+        recentGames.forEach((game) => {
             const bar = document.createElement('div');
             bar.className = 'chart-bar';
             const heightPct = Math.max((game.score / maxScore) * 100, 5); // 5% minimum height for visibility
@@ -121,12 +129,11 @@ class GameManager {
         }
     }
 
- startGame() {
-        // Use the static method from the new MenuManager
+    startGame() {
         this.activeModules = MenuManager.getActiveModules();
 
         if (this.activeModules.length === 0) {
-            alert("Please select at least one module to start.");
+            alert('Please select at least one module to start.');
             return;
         }
 
@@ -137,27 +144,32 @@ class GameManager {
         this.rawCorrect = 0;
         this.timeLeft = 120;
         this.els.score.innerText = this.score;
-        this.updateTimerDisplay();
-        
+
         this.showScreen('game');
         this.els.input.value = '';
         this.els.input.focus();
 
+        this.runTimer = new GameTimer(120, () => this.endGame());
+        this.runTimer.start();
         this.nextProblem();
-        this.timerInterval = setInterval(() => this.tick(), 1000);
     }
     nextProblem() {
-       const randomModuleId = this.activeModules[Math.floor(Math.random() * this.activeModules.length)];
-        
+        const randomModuleId =
+            this.activeModules[Math.floor(Math.random() * this.activeModules.length)];
+
         this.currentProblem = ModuleMap[randomModuleId].generateProblem();
-        
-        katex.render(this.currentProblem.latex, this.els.expression, { throwOnError: false, displayMode: true });
-        this.els.input.value = '';    }
+
+        katex.render(this.currentProblem.latex, this.els.expression, {
+            throwOnError: false,
+            displayMode: true,
+        });
+        this.els.input.value = '';
+    }
 
     checkAnswer() {
         if (this.els.input.value === '') return;
         const userVal = parseInt(this.els.input.value, 10);
-        
+
         if (userVal === this.currentProblem.answer) {
             this.score += this.pointsPerQuestion;
             this.rawCorrect++;
@@ -166,30 +178,18 @@ class GameManager {
         }
     }
 
-    tick() {
-        this.timeLeft--;
-        this.updateTimerDisplay();
-        if (this.timeLeft <= 0) this.endGame();
-    }
-
-    updateTimerDisplay() {
-        const mins = Math.floor(this.timeLeft / 60);
-        const secs = this.timeLeft % 60;
-        this.els.timer.innerText = `${mins}:${secs.toString().padStart(2, '0')}`;
-    }
-
     endGame() {
-        clearInterval(this.timerInterval);
+        if (this.runTimer) this.runTimer.stop();
         this.showScreen('end');
         this.els.finalScore.innerText = this.score;
         this.els.statsBreakdown.innerText = `(${this.rawCorrect} solved at ${this.pointsPerQuestion} pts each)`;
-        
+
         this.saveScore(this.score);
         this.renderChart();
     }
 
     saveScore(score) {
-        if (score === 0) return; // Don't chart 0 point runs 
+        if (score === 0) return; // Don't chart 0 point runs
         const db = JSON.parse(localStorage.getItem('speedmath_db') || '[]');
         db.push({ score, timestamp: Date.now() });
         localStorage.setItem('speedmath_db', JSON.stringify(db));

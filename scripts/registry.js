@@ -9,15 +9,15 @@ window.MathRegistry = {
     "Linear Algebra": {
         defaultActive: true,
         modules: [
-            { id: "Determinants", name: "Determinants", sig: "\\begin{vmatrix} a & b \\\\ c & d \\end{vmatrix}" }
+            { id: "Determinants", name: "Determinants", sig: "\\begin{vmatrix} 12 & -6 \\\\ 2 & 11 \\end{vmatrix}" }
         ]
     },
     "Real Calculus": {
         defaultActive: true,
         modules: [
             { id: "Limits", name: "Limits", sig: "\\displaystyle \\lim_{x \\to \\infty} \\frac{x}{2x}" },
-            { id: "Integrals", name: "Definite Integrals", sig: "\\displaystyle \\int_0^\\pi \\sin(x) dx" }
+            { id: "Integrals", name: "Definite Integrals", sig: "\\displaystyle \\int_0^\\pi \\sin(x) dx" },
+            { id: "Derivatives", name: "Derivatives", sig: "\\left. \\frac{d}{dx}(x^2) \\right|_{x=3}" }
         ]
     }
-    // Future subjects (Multivariate, Real Analysis) easily plug in here
 };
