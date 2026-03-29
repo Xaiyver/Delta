@@ -1,6 +1,7 @@
 // menu.js
 
 import { MathRegistry } from './registry.js';
+import { ScoreManager } from './core/score_manager.js';
 
 export class MenuManager {
     constructor() {
@@ -43,7 +44,7 @@ export class MenuManager {
             checkbox.className = 'module-checkbox';
 
             // Retrieve high score for this specific module
-            const highScore = localStorage.getItem(`highscore_${mod.id}`) || 0;
+            const highScore = ScoreManager.getModuleHighScore(mod.id);
 
             const content = document.createElement('div');
             content.className = 'card-content';

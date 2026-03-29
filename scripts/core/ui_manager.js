@@ -58,9 +58,9 @@ export class UIManager {
         this.els.input.focus();
     }
 
-    renderChart(db) {
+    renderChart(db = []) {
         this.els.chartContainer.innerHTML = '';
-        if (db.length === 0) {
+        if (!db || db.length === 0) {
             this.els.chartContainer.innerHTML =
                 '<span class="empty-chart">No games played yet.</span>';
             return;

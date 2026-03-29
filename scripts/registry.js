@@ -5,7 +5,7 @@ export const MathRegistry = {
         modules: [{ id: 'BasicOperations', name: 'Basic Operations', sig: '14 + (-16)' }],
     },
     'Linear Algebra': {
-        defaultActive: true,
+        defaultActive: false,
         modules: [
             {
                 id: 'Determinants',
@@ -15,7 +15,7 @@ export const MathRegistry = {
         ],
     },
     'Real Calculus': {
-        defaultActive: true,
+        defaultActive: false,
         modules: [
             {
                 id: 'Limits',
