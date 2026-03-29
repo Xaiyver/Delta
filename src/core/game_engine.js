@@ -8,7 +8,7 @@ export class GameEngine {
         this.problemManager = problemManager;
         this.onEnd = onEndCallback;
         this.score = 0;
-        this.timer = new GameTimer(30, this.handleTimeUp.bind(this));
+        this.timer = new GameTimer(120, this.handleTimeUp.bind(this));
     }
 
     start() {
