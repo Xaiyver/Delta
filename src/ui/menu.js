@@ -1,7 +1,7 @@
 // menu.js
 
-import { MathRegistry } from './registry.js';
-import { ScoreManager } from './core/score_manager.js';
+import { MathRegistry } from '../registry.js';
+import { ScoreManager } from '../core/score_manager.js';
 
 export class MenuManager {
     constructor() {

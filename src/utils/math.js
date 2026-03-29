@@ -5,8 +5,8 @@ export class MathUtils {
 
     static randNonTrivial(min, max, allowOne = false) {
         let val;
-        do { 
-            val = this.rand(min, max); 
+        do {
+            val = this.rand(min, max);
         } while (val === 0 || (!allowOne && Math.abs(val) === 1));
         return val;
     }
@@ -36,5 +36,3 @@ export class MathUtils {
         return val;
     }
 }
-
-window.MathModules = {};

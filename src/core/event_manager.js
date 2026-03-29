@@ -14,18 +14,20 @@ export class EventManager {
         // Navigation
         this.els.configBtn.addEventListener('click', () => this.game.showScreen('config'));
         this.els.configBackBtn.addEventListener('click', () => {
-            this.game.showScreen('start');
+            this.game.ui.showScreen('start');
             this.game.ui.renderChart();
         });
 
         this.els.backToMenuBtn.addEventListener('click', () => {
             if (this.game.runTimer) this.game.runTimer.stop();
-            this.game.showScreen('start');
+            this.game.ui.showScreen('start');
             this.game.ui.renderChart();
         });
 
         // Input
-        this.els.input.addEventListener('input', () => this.game.checkAnswer());
+        this.els.input.addEventListener('input', () =>
+            this.game.engine.checkAnswer(this.game.ui.els.input.value),
+        );
 
         // Configuration
         this.els.fontSizeSlider.addEventListener('input', (e) => {

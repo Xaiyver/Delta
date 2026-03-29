@@ -1,4 +1,4 @@
-import { MathUtils } from '../math.js';
+import { MathUtils } from '../utils/math.js';
 
 export class Limits {
     static generators = [
@@ -10,16 +10,16 @@ export class Limits {
             const sign = c >= 0 ? '+' : '-';
             return {
                 latex: `\\lim_{x \\to ${a}} (${b === 1 ? '' : b === -1 ? '-' : b}x ${sign} ${Math.abs(c)})`,
-                answer: b * a + c
+                answer: b * a + c,
             };
         },
-        
+
         // Rational Hole
         () => {
             const a = MathUtils.randNonTrivial(-10, 10);
             return {
                 latex: `\\lim_{x \\to ${a}} \\frac{x^2 - ${a * a}}{x - ${MathUtils.formatNeg(a)}}`,
-                answer: 2 * a
+                answer: 2 * a,
             };
         },
 
@@ -34,7 +34,7 @@ export class Limits {
             const signD = d >= 0 ? '+' : '-';
             return {
                 latex: `\\lim_{x \\to \\infty} \\frac{${a}x^2 ${signB} ${Math.abs(b)}x}{${c}x^2 ${signD} ${Math.abs(d)}}`,
-                answer: answer
+                answer: answer,
             };
         },
 
@@ -45,12 +45,12 @@ export class Limits {
             const a = b * answer;
             return {
                 latex: `\\lim_{x \\to 0} \\frac{\\sin(${a}x)}{${b}x}`,
-                answer: answer
+                answer: answer,
             };
-        }
+        },
     ];
 
     static generateProblem() {
         return MathUtils.pickRandom(this.generators)();
     }
-};
+}

@@ -1,15 +1,13 @@
-import { GameTimer } from '../timer.js';
+import { GameTimer } from './timer.js';
 import { ScoreManager } from './score_manager.js';
-import { MenuManager } from '../menu.js';
+import { MenuManager } from '../ui/menu.js';
 
 export class GameEngine {
     constructor(ui, problemManager, onEndCallback) {
         this.ui = ui;
         this.problemManager = problemManager;
         this.onEnd = onEndCallback;
-
         this.score = 0;
-        this.rawCorrect = 0;
         this.timer = new GameTimer(30, this.handleTimeUp.bind(this));
     }
 
@@ -35,9 +33,11 @@ export class GameEngine {
     }
 
     checkAnswer(input) {
+        const val = parseInt(input, 10);
+        if (isNaN(val)) return;
+
         if (this.problemManager.isCorrect(input)) {
-            this.score += 1; // Or your point logic
-            this.rawCorrect += 1;
+            this.score += 1;
             this.ui.updateScore(this.score);
             this.nextQuestion();
         }

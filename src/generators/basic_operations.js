@@ -1,4 +1,4 @@
-import { MathUtils } from '../math.js';
+import { MathUtils } from '../utils/math.js';
 
 export class BasicOperations {
     static generators = [
