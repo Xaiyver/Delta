@@ -5,24 +5,35 @@
     --base01: #586e75;
     --blue: #268bd2;
     --cyan: #2aa198;
-    --expr-size: 3rem; 
+    --expr-size: 3rem;
 }
 
 body {
     background-color: var(--base3);
     color: var(--base00);
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family:
+        system-ui,
+        -apple-system,
+        sans-serif;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    /* Use min-height so it can expand if content is larger than the screen */
+    min-height: 100vh;
     margin: 0;
     text-align: center;
-    overflow: hidden;
+    /* Allow scrolling instead of hiding */
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
-h1, h2 { color: var(--base01); }
-.hidden { display: none !important; }
+h1,
+h2 {
+    color: var(--base01);
+}
+.hidden {
+    display: none !important;
+}
 
 /* Global Button Styling */
 button {
@@ -33,7 +44,9 @@ button {
     font-size: 1.2rem;
     border-radius: 6px;
     cursor: pointer;
-    transition: transform 0.15s ease, background-color 0.15s ease;
+    transition:
+        transform 0.15s ease,
+        background-color 0.15s ease;
     margin: 5px;
 }
 
@@ -52,4 +65,27 @@ button:hover {
 
 .alt-btn:hover {
     background-color: var(--base00);
+}
+@media (max-width: 600px) {
+    :root {
+        --expr-size: 2rem; /* Reduce math size */
+    }
+
+    body {
+        padding: 10px;
+    }
+
+    button {
+        width: 100%; /* Full-width buttons for easier tapping */
+        font-size: 1rem;
+    }
+
+    #dynamic-menu {
+        gap: 15px;
+    }
+
+    .card-content {
+        width: 100px; /* Shrink cards to fit phones */
+        height: 100px;
+    }
 }
