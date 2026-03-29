@@ -1,6 +1,6 @@
 export class EventManager {
     constructor(game) {
-        this.game = game; // Reference to the main GameManager
+        this.game = game;
         this.ui = game.ui;
         this.els = game.ui.els;
         this.init();
@@ -22,6 +22,7 @@ export class EventManager {
             if (this.game.runTimer) this.game.runTimer.stop();
             this.game.ui.showScreen('start');
             this.game.ui.renderChart();
+            this.game.engine.stop();
         });
 
         // Input

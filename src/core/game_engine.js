@@ -32,6 +32,10 @@ export class GameEngine {
         this.ui.clearInput();
     }
 
+    stop() {
+        this.timer.stop();
+    }
+
     checkAnswer(input) {
         const val = parseInt(input, 10);
         if (isNaN(val)) return;
