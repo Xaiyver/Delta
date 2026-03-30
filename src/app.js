@@ -24,7 +24,7 @@ class GameManager {
     }
 
     loadConfig() {
-        const savedSize = localStorage.getItem('speedmath_fontsize') || '3';
+        const savedSize = localStorage.getItem('speedmath_fontsize') || '2';
         this.els.fontSizeSlider.value = savedSize;
         this.els.fontSizeDisplay.innerText = savedSize;
         document.documentElement.style.setProperty('--expr-size', `${savedSize}rem`);

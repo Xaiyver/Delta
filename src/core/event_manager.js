@@ -12,7 +12,7 @@ export class EventManager {
         this.els.restartBtn.addEventListener('click', () => this.game.start());
 
         // Navigation
-        this.els.configBtn.addEventListener('click', () => this.game.showScreen('config'));
+        this.els.configBtn.addEventListener('click', () => this.ui.showScreen('config'));
         this.els.configBackBtn.addEventListener('click', () => {
             this.game.ui.showScreen('start');
             this.game.ui.renderChart();
