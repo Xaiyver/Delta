@@ -61,8 +61,7 @@ export class UIManager {
     renderChart(db = []) {
         this.els.chartContainer.innerHTML = '';
         if (!db || db.length === 0) {
-            this.els.chartContainer.innerHTML =
-                '<span class="empty-chart">No games played yet.</span>';
+            this.els.chartContainer.innerHTML = '<span class="empty-chart">No attempts yet.</span>';
             return;
         }
 
