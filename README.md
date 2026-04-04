@@ -13,7 +13,4 @@ Delta is an experimental browser-based tool for practicing mental math in variou
 * **Mental Arithmetic:** Expressions are reasonably simple for immediate mental calculation.
 
 ## Status
-Purely experimental. Contributions, feedback, and bug reports are welcome. 
-
-## Why does this exist?
-I created this tool out of personal frustration. When working through higher math, constantly stopping to rederive basic arithmetic kills momentum. Delta (alongside a custom Anki deck) is simply a way to drill those fundamentals until they become second nature.
+Purely experimental. Contributions, feedback, and bug reports are welcome.
