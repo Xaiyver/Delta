@@ -1,7 +1,3 @@
-# Delta
-
-A minimalist, high-performance mental arithmetic trainer
-
 ## Overview
 
 Delta is an experimental browser-based tool for practicing mental math in various subjects, e.g. linear algebra and calculus, that tracks performance metrics locally. You select your subjects, start a timed run, and solve randomized single expressions that evaluate to an integer between -1000 and 1000. Your score is saved to a lightweight local storage at the end of the run.
